@@ -248,6 +248,8 @@ class PDFMinerBackend(ReaderBackend):
             self.references.add(Reference(url, self.curpage))
 
         for ref in extractor.extract_arxiv(self.text):
+            if not ref.startswith('arxiv'):
+                ref = 'arxiv:'+ref
             self.references.add(Reference(ref, self.curpage))
 
         for ref in extractor.extract_doi(self.text):
