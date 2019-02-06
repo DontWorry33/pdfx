@@ -250,6 +250,11 @@ class PDFMinerBackend(ReaderBackend):
         for ref in extractor.extract_arxiv(self.text):
             if not ref.startswith('arxiv'):
                 ref = 'arxiv:'+ref
+            while not ref[-1].isalnum():
+                ref = ref[0:-1]
+            if ref == '':
+                print('some problem with alg')
+                
             self.references.add(Reference(ref, self.curpage))
 
         for ref in extractor.extract_doi(self.text):
